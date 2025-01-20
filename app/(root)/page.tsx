@@ -1,7 +1,9 @@
 export default function Home() {
   return (
     <>
-      <h1 className="heading"> home</h1>{" "}
+      <section className="pink_container">
+        <h1 className="heading"> home</h1>
+      </section>
     </>
   );
 }
