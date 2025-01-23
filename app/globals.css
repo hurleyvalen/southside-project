@@ -12,7 +12,10 @@
 
 @layer utilities {
     .tag-line{
-        @apply font-thin text-center sm:align-top sm:w-[1250px] sm:text-[64px] text-[20px] text-creamyBeige mb-5;
+        @apply font-light text-center align-top xl:w-[1250px] md:text-[40px] xl:text-[64px] text-[27px] text-creamyBeige mb-5;
+    }
+    .sub-tag{
+        @apply font-normal text-center align-top xl:w-[1250px] md:text-[40px] xl:text-[64px] text-[27px] text-creamyBeige mb-5;
     }
     .flex-between {
         @apply flex justify-between items-center;
@@ -236,4 +239,15 @@ body{
 .landing-page{
     /* background-position: -400px 0px; */
     background-image: url(../public/landingpage.jpg);
+}
+/* #schedule{
+    background-position: -400px -2000px;
+    background-image: url(../public/schedule.jpg);
+} */
+/* #schedule{
+    background-image: url(../public/schedule_60.png);
+} */
+
+#schedule{
+    background-image: url(../public/schedule_green.jpg);
 }
