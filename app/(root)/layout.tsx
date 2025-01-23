@@ -7,7 +7,6 @@ export default function Layout({
   return (
     <main className="font-poppins">
       <Navbar />
-
       {children}
       <Footer />
     </main>

@@ -11,6 +11,9 @@
 }
 
 @layer utilities {
+    .tag-line{
+        @apply font-thin text-center sm:align-top sm:w-[1250px] sm:text-[64px] text-[20px] text-creamyBeige mb-5;
+    }
     .flex-between {
         @apply flex justify-between items-center;
     }
@@ -218,4 +221,19 @@
 
 .w-md-editor-toolbar {
     padding: 10px !important;
+}
+
+body{
+    /* background-position: 0 -400px;  */
+    /* background-image: url(../public/landingpage.jpg); */
+}
+@media only screen and (min-width: 768px) {
+    .landing-page{
+        background-position: 0 -750px;
+    }
+    
+}
+.landing-page{
+    /* background-position: -400px 0px; */
+    background-image: url(../public/landingpage.jpg);
 }
