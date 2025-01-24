@@ -6,6 +6,7 @@
 
 @layer base {
     :root {
+        scroll-behavior: smooth;
         --radius: 0.5rem;
     }
 }
@@ -232,13 +233,12 @@ body{
 }
 @media only screen and (min-width: 768px) {
     .landing-page{
-        background-position: 0 -750px;
+        background-position: 0 -650px;
     }
     
 }
 .landing-page{
-    /* background-position: -400px 0px; */
-    background-image: url(../public/landingpage.jpg);
+    background-image: url(../public/southside-brews-bg.jpg);
 }
 /* #schedule{
     background-position: -400px -2000px;
@@ -251,3 +251,18 @@ body{
 #schedule{
     background-image: url(../public/schedule_green.jpg);
 }
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in-out;
+  }

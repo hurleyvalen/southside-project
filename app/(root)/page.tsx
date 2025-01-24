@@ -1,5 +1,7 @@
 import Divider from "../components/Divider";
 import Hero from "../components/sections/Hero";
+import Menu from "../components/sections/Menu";
+import Order from "../components/sections/Order";
 import Schedule from "../components/sections/Schedule";
 export default function Home() {
   return (
@@ -7,6 +9,8 @@ export default function Home() {
       <Hero />
       <Divider />
       <Schedule />
+      <Menu />
+      <Order />
     </>
   );
 }

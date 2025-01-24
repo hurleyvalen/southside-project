@@ -29,13 +29,13 @@ const Navbar = async () => {
               </Link>
               <Link
                 className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach  duration-200"
-                href=""
+                href="#menu"
               >
                 <span>Menu</span>
               </Link>
               <Link
                 className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
-                href=""
+                href="#order"
               >
                 <span>Order for Pickup</span>
               </Link>
@@ -85,29 +85,44 @@ const Navbar = async () => {
               >
                 <div className="py-1">
                   <MenuItem>
-                    <div className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none">
-                      <button className="">Schedule</button>
-                    </div>
+                    <Link
+                      className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
+                      href="#scheduleTime"
+                    >
+                      <span>Schedule</span>
+                    </Link>
                   </MenuItem>
                   <MenuItem>
-                    <div className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none">
-                      <button className="">Menu</button>
-                    </div>
+                    <Link
+                      className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
+                      href="#menu"
+                    >
+                      <span>Menu</span>
+                    </Link>
                   </MenuItem>
                   <MenuItem>
-                    <div className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none">
-                      <button className="">Order For Pickup</button>
-                    </div>
+                    <Link
+                      className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
+                      href="#order"
+                    >
+                      <span>Order For Pickup</span>
+                    </Link>
                   </MenuItem>
                   <MenuItem>
-                    <div className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none">
-                      <button className="">Book Our Cafe</button>
-                    </div>
+                    <Link
+                      className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
+                      href="#book"
+                    >
+                      <span>Book Our Cafe</span>
+                    </Link>
                   </MenuItem>
                   <MenuItem>
-                    <div className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none">
-                      <button className="">Contact Us</button>
-                    </div>
+                    <Link
+                      className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
+                      href="#contact"
+                    >
+                      <span>Contact Us</span>
+                    </Link>
                   </MenuItem>
                 </div>
               </MenuItems>
