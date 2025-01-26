@@ -237,9 +237,9 @@ body{
     }
     
 }
-.landing-page{
+/* .landing-page{
     background-image: url(../public/southside-brews-bg.jpg);
-}
+} */
 /* #schedule{
     background-position: -400px -2000px;
     background-image: url(../public/schedule.jpg);
@@ -248,9 +248,9 @@ body{
     background-image: url(../public/schedule_60.png);
 } */
 
-#schedule{
+/* #schedule{
     background-image: url(../public/schedule_green.jpg);
-}
+} */
 
 @keyframes fadeIn {
     from {

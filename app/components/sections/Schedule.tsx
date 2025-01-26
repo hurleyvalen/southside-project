@@ -13,7 +13,10 @@ let weekDays = [
 const Schedule = () => {
   const dayOfWeek = useDate();
   return (
-    <section id="schedule" className=" bg-cover bg-center">
+    <section
+      id="schedule"
+      className=" bg-cover bg-center bg-[url(../public/schedule_green.jpg)]"
+    >
       <div className="flex justify-center mt-2 py-[300px] backdrop-brightness-[0.75] ">
         {/* rectangle */}
         <div

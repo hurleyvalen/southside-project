@@ -87,7 +87,7 @@ const Booking = ({ booking }: Props) => {
     setPhone("");
     setTime("");
     setSelectedDate(selected);
-    console.log("Selected date:", selected.toDateString());
+    // console.log("Selected date:", selected.toDateString());
   };
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
@@ -102,7 +102,7 @@ const Booking = ({ booking }: Props) => {
       };
 
       await formSchema.parseAsync(formValues);
-      console.log("Appointment Details:", formValues);
+      // console.log("Appointment Details:", formValues);
       alert("Appointment saved successfully!");
       setErrors({});
       setTitle("");
@@ -111,15 +111,15 @@ const Booking = ({ booking }: Props) => {
       setPhone("");
       setTime("");
       setSelectedDate(null);
-      if (result.status == "SUCCESS") {
-        toast({
-          title: "Success",
-          description: "Your startup pitch has been created successfully",
-        });
+      // if (result.status == "SUCCESS") {
+      //   toast({
+      //     title: "Success",
+      //     description: "Your startup pitch has been created successfully",
+      //   });
 
-        router.push(`/startup/${result._id}`);
-      }
-      return result;
+      //   router.push(`/startup/${result._id}`);
+      // }
+      // return result;
       // Handle successful form submission logic here
     } catch (error) {
       if (error instanceof z.ZodError) {
