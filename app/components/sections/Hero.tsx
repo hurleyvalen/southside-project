@@ -3,7 +3,7 @@
 const Hero = () => {
   return (
     <>
-      <section className="landing-page bg-cover bg-center bg-[url(/public/southside-brews-bg.jpg)]">
+      <section className="landing-page bg-cover bg-center bg-[url(/southside-brews-bg.jpg)]">
         <div className="backdrop-brightness-50 sm:py-64 py-80 ">
           <div className="hidden sm:flex justify-center">
             <h1 className="static justify-center tag-line ">
