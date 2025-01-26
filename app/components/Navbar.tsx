@@ -41,13 +41,13 @@ const Navbar = async () => {
               </Link>
               <Link
                 className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
-                href=""
+                href="#booking"
               >
                 <span>Book Our Cafe</span>
               </Link>
               <Link
                 className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
-                href=""
+                href="#contact"
               >
                 <span>Contact Us</span>
               </Link>
@@ -111,7 +111,7 @@ const Navbar = async () => {
                   <MenuItem>
                     <Link
                       className="block px-4 py-2 text-sm text-black data-[focus]:bg-blushPeach data-[focus]:text-black data-[focus]:outline-none"
-                      href="#book"
+                      href="#booking"
                     >
                       <span>Book Our Cafe</span>
                     </Link>
