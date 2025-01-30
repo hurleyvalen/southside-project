@@ -1,14 +1,5 @@
 "use client";
 import useDate from "@/hooks/useDate";
-let weekDays = [
-  { day: "Monday", status: "Closed", hours: "11 AM - 11 PM" },
-  { day: "Tuesday", status: "Open", hours: "11 AM - 11 PM" },
-  { day: "Wednesday", status: "Open", hours: "11 AM - 11 PM" },
-  { day: "Thursday", status: "Open", hours: "11 AM - 11 PM" },
-  { day: "Friday", status: "Open", hours: "11 AM - 11 PM" },
-  { day: "Saturday", status: "Open", hours: "11 AM - 11 PM" },
-  { day: "Sunday", status: "Open", hours: "11 AM - 11 PM" },
-];
 
 interface Props {
   schedule: any;
@@ -36,14 +27,14 @@ const Schedule = ({ schedule }: Props) => {
               Pouring Times
             </h1>
             <ul className="grid grid-cols-1 gap-4 my-10">
-              {schedule.map(({ _id, day, status, hours }: any) => (
+              {schedule.map(({ _id, weekDay, status, hours }: any) => (
                 <li key={_id} className="flex justify-between px-14 p-4">
                   <h3
                     className={`text-md sm:text-2xl md:text-5xl font-regular text-cream ${
-                      day === dayOfWeek && "bg-sageGreen rounded-xl p-2"
+                      weekDay === dayOfWeek && "bg-sageGreen rounded-xl p-2"
                     }`}
                   >
-                    {day}
+                    {weekDay}
                   </h3>
                   {status === "Closed" ? (
                     <h3 className="text-md sm:text-2xl md:text-5xl font-regular text-cream">
