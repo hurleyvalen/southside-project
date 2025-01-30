@@ -94,11 +94,11 @@ const Booking = ({ booking }: Props) => {
     setTime("");
     setSelectedDate(selected);
     toast({
-      title: "DISCLAIMER",
+      title: "IMPORTANT NOTE",
       description:
         "Submitting a booking request does not guarantee a confirmed reservation. All bookings are subject to availability and approval by South Side Brews. Once your request is received, our team will review it and send you a confirmation text with payment details if your selected slot is available. Your booking is only finalized once payment is completed and you receive a confirmation from our management. Thank you for your understanding!",
       variant: "destructive",
-      className: "text-red-900 font-bold bg-black",
+      className: "text-red-900 font-bold bg-white",
       duration: 20000,
     });
     // console.log("Selected date:", selected.toDateString());
