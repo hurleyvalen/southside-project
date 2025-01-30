@@ -17,5 +17,5 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
     throw new Error(errorMessage)
   }
 
-  return v
+  return v;
 }

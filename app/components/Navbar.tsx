@@ -25,7 +25,7 @@ const Navbar = async () => {
                 className="transition hover:border-b-2 hover:border-blushPeach hover:text-blushPeach duration-200"
                 href="#scheduleTime"
               >
-                <span>Schedule</span>
+                <span>Open Hours</span>
               </Link>
               <Link
                 className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach  duration-200"

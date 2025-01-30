@@ -2,6 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { toast } from "@/hooks/use-toast";
+import { z } from "zod";
+import emailjs from "@emailjs/browser";
+import { contactFormSchema } from "@/lib/validation";
+
+const serviceId = "service_3ilgy07";
+const templateId = "template_fc0z60p";
+const publicKey = "jSKmbut0xKLnV_e_0";
 
 const Contact = () => {
   const [isClient, setIsClient] = useState(false);
@@ -11,25 +19,67 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Ensures this code only runs on the client side
     setIsClient(true);
   }, []);
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // Clear field-specific error when user starts typing
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Add form submission logic here (e.g., send data to a server or email API)
+
+    try {
+      // Validate form data
+      const validatedData = await contactFormSchema.parseAsync(formData);
+
+      // Send email if validation passes
+      await emailjs.send(serviceId, templateId, validatedData, publicKey);
+
+      toast({
+        title: "Success",
+        description: "Your message has been sent successfully!",
+      });
+
+      setFormData({ name: "", email: "", message: "" }); // Reset form
+      setSubmitted(true);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors: Record<string, string> = {};
+        for (const key in error.flatten().fieldErrors) {
+          if (error.flatten().fieldErrors[key]) {
+            fieldErrors[key] = error.flatten().fieldErrors[key]?.[0] || "";
+          }
+        }
+        setErrors(fieldErrors);
+
+        toast({
+          title: "Validation Error",
+          description: "Please check your inputs and try again.",
+          variant: "destructive",
+        });
+
+        return;
+      }
+
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (!isClient) {
-    // Optional: Add a loading spinner or fallback content here
     return <div>Loading...</div>;
   }
 
@@ -78,6 +128,7 @@ const Contact = () => {
                 onSubmit={handleSubmit}
                 className="bg-white p-6 rounded-lg shadow-md"
               >
+                {/* Name Field */}
                 <div className="mb-4">
                   <label
                     htmlFor="name"
@@ -91,11 +142,18 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-green-300"
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring ${
+                      errors.name ? "border-red-500" : "focus:ring-green-300"
+                    }`}
                     placeholder="Your Name"
                     required
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
+
+                {/* Email Field */}
                 <div className="mb-4">
                   <label
                     htmlFor="email"
@@ -109,11 +167,18 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-green-300"
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring ${
+                      errors.email ? "border-red-500" : "focus:ring-green-300"
+                    }`}
                     placeholder="Your Email"
                     required
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
+
+                {/* Message Field */}
                 <div className="mb-4">
                   <label
                     htmlFor="message"
@@ -126,12 +191,21 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-green-300"
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring ${
+                      errors.message ? "border-red-500" : "focus:ring-green-300"
+                    }`}
                     placeholder="Your Message"
                     rows={5}
                     required
-                  ></textarea>
+                  />
+                  {errors.message && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
+
+                {/* Submit Button */}
                 <button
                   type="submit"
                   className="w-full bg-green-900 text-white py-3 rounded-lg font-bold hover:bg-green-800 transition duration-300"

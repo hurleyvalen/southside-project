@@ -21,3 +21,21 @@ export const formSchema = z.object({
     .min(11, { message: " Phone number must be valid." })
     .max(11, { message: " Phone number must be valid."}),
 });
+
+export const contactFormSchema = z.object({
+  name: z
+    .string()
+    .regex(/^[a-zA-Z\s'-]+$/, { message: "Name contains invalid characters." }) // Allows letters, spaces, apostrophes, and hyphens
+    .min(2, { message: "Name must be at least 2 characters." })
+    .max(50, { message: "Name must be at most 50 characters." }),
+
+  email: z
+    .string()
+    .email({ message: "Invalid email address." })
+    .max(100, { message: "Email must be at most 100 characters." }),
+
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters." })
+    .max(1000, { message: "Message must be at most 1000 characters." })
+});

@@ -10,7 +10,11 @@ let weekDays = [
   { day: "Sunday", status: "Open", hours: "11 AM - 11 PM" },
 ];
 
-const Schedule = () => {
+interface Props {
+  schedule: any;
+}
+
+const Schedule = ({ schedule }: Props) => {
   const dayOfWeek = useDate();
   return (
     <section
@@ -21,7 +25,7 @@ const Schedule = () => {
         {/* rectangle */}
         <div
           id="scheduleTime"
-          className=" w-[1085px] h-[600px] sm:h-[650px] md:h-[847px] bg-sageGreen/30 rounded-3xl"
+          className=" w-[1085px] h-[600px] sm:h-[650px] md:h-[847px] bg-sageGreen/20 rounded-3xl"
         >
           {/* HEADER FOR POURING TIMES */}
           <div className="h-[500px] px-10">
@@ -32,8 +36,8 @@ const Schedule = () => {
               Pouring Times
             </h1>
             <ul className="grid grid-cols-1 gap-4 my-10">
-              {weekDays.map(({ day, status, hours }, idx) => (
-                <li key={idx} className="flex justify-between px-14 p-4">
+              {schedule.map(({ _id, day, status, hours }: any) => (
+                <li key={_id} className="flex justify-between px-14 p-4">
                   <h3
                     className={`text-md sm:text-2xl md:text-5xl font-regular text-cream ${
                       day === dayOfWeek && "bg-sageGreen rounded-xl p-2"

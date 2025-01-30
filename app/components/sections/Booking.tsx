@@ -6,7 +6,13 @@ import { MdChevronLeft, MdChevronRight, MdClose } from "react-icons/md";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { createAppointment } from "@/lib/actions";
+import emailjs from "@emailjs/browser";
+
+const serviceId = "service_3ilgy07";
+const templateId = "template_119vv5f";
+const publicKey = "jSKmbut0xKLnV_e_0";
+
 interface Props {
   booking: any;
 }
@@ -72,7 +78,7 @@ const Booking = ({ booking }: Props) => {
   const handleRight = () => {
     setCurrentView((prev) => {
       const newMonth = prev.month + 1;
-      return newMonth > 2
+      return newMonth > 1
         ? { month: newMonth - 1, year: prev.year }
         : { month: newMonth, year: prev.year };
     });
@@ -92,18 +98,54 @@ const Booking = ({ booking }: Props) => {
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
+      emailjs.init(publicKey);
       const formValues = {
         month: months[selectedDate?.getMonth() ?? 0],
+        day: selectedDate?.getDate() ?? 0,
         time,
         title: formData.get("title") as string,
         description: formData.get("description") as string,
         name: formData.get("name") as string,
         phone: formData.get("phone") as string,
       };
-
+      console.log("Appointment Details:", formValues);
       await formSchema.parseAsync(formValues);
-      // console.log("Appointment Details:", formValues);
-      alert("Appointment saved successfully!");
+      const result = await createAppointment(
+        prevState,
+        formData,
+        formValues.month,
+        formValues.day,
+        formValues.time
+      );
+
+      const emailParams = {
+        from_name: name,
+        email_type: "Booking",
+        title,
+        month: months[selectedDate?.getMonth() ?? 0],
+        day: selectedDate?.getDay() ?? 0,
+        time,
+        description,
+        phone,
+      };
+      emailjs
+        .send(serviceId, templateId, emailParams)
+        .then((response) => {
+          console.log("Email sent.", response);
+        })
+        .catch((error) => {
+          console.error("Error sending email.", error);
+        });
+
+      if (result.status == "SUCCESS") {
+        toast({
+          title: "Success",
+          description:
+            "Your booking has been created successfully. Someone will contact you soon.",
+        });
+      }
+      // Handle successful form submission logic here
+      // alert("Appointment saved successfully!");
       setErrors({});
       setTitle("");
       setDescription("");
@@ -111,16 +153,7 @@ const Booking = ({ booking }: Props) => {
       setPhone("");
       setTime("");
       setSelectedDate(null);
-      // if (result.status == "SUCCESS") {
-      //   toast({
-      //     title: "Success",
-      //     description: "Your startup pitch has been created successfully",
-      //   });
-
-      //   router.push(`/startup/${result._id}`);
-      // }
-      // return result;
-      // Handle successful form submission logic here
+      return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
@@ -133,11 +166,11 @@ const Booking = ({ booking }: Props) => {
         });
 
         // Reset form fields on error
-        setTitle("");
-        setDescription("");
-        setName("");
-        setPhone("");
-        setTime("");
+        // setTitle("");
+        // setDescription("");
+        // setName("");
+        // setPhone("");
+        // setTime("");
 
         return { ...prevState, error: "Validation failed", status: "ERROR" };
       }
