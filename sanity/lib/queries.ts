@@ -7,5 +7,5 @@ export const MENU_QUERY = defineQuery(`*[_type=="menu" && defined(_id)]{
   _id, category, subCategory, menuList
 }`);
 export const SCHEDULE_QUERY = defineQuery(`*[_type=="schedule" && defined(_id)]{
-  _id, weekDay, status, hours
+  _id, order, weekDay, status, hours
 }`);

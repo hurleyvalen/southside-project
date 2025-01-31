@@ -6,6 +6,12 @@ export const schedule = defineType({
     type: "document",
     fields:[
         defineField({
+            name: "order",
+            type: "number",
+            validation: (Rule) => Rule.required()
+
+        }),
+        defineField({
             name: "weekDay",
             type: "string",
             validation: (Rule) => Rule.required()

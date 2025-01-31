@@ -45,24 +45,31 @@ const Menu = ({ menu }: Props) => {
   };
 
   return (
-    <section id="menu" className="bg-sageGreen p-10 min-h-screen">
+    <section id="menu" className="bg-sageGreen p-10">
       {showCategories ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {menu.map((category: any, index: number) => (
-            <div
-              key={category._id}
-              className="cursor-pointer border-2 border-dustyRose p-5 rounded-lg hover:bg-mochaBrown transition duration-300"
-              onClick={() => handleCategorySelect(index)}
-            >
-              <h3 className="text-2xl text-forestGreen font-semibold text-center">
-                {category.category}
-              </h3>
-              <p className="text-sm text-forestGreen font-semibold text-center">
-                {category.subCategory}
-              </p>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="py-5 mb-5 bg-forestGreen rounded-xl shadow-md shadow-green-900">
+            <h1 className="text-5xl font-thin text-sageGreen text-center">
+              MENU
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {menu.map((category: any, index: number) => (
+              <div
+                key={category._id}
+                className="cursor-pointer border-2 border-dustyRose p-5 rounded-lg hover:bg-mochaBrown transition duration-300"
+                onClick={() => handleCategorySelect(index)}
+              >
+                <h3 className="text-2xl text-forestGreen font-semibold text-center">
+                  {category.category}
+                </h3>
+                <p className="text-sm text-forestGreen font-semibold text-center">
+                  {category.subCategory}
+                </p>
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
         <div>
           <div className="flex justify-between items-center pb-6">

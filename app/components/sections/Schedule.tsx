@@ -1,14 +1,5 @@
 "use client";
 import useDate from "@/hooks/useDate";
-let weekDays = [
-  { weekDay: "Monday", status: "Closed", hours: "11 AM - 11 PM" },
-  { weekDay: "Tuesday", status: "Open", hours: "11 AM - 11 PM" },
-  { weekDay: "Wednesday", status: "Open", hours: "11 AM - 11 PM" },
-  { weekDay: "Thursday", status: "Open", hours: "11 AM - 11 PM" },
-  { weekDay: "Friday", status: "Open", hours: "11 AM - 11 PM" },
-  { weekDay: "Saturday", status: "Open", hours: "11 AM - 11 PM" },
-  { weekDay: "Sunday", status: "Open", hours: "11 AM - 11 PM" },
-];
 
 interface Props {
   schedule: any;
@@ -16,10 +7,16 @@ interface Props {
 
 const Schedule = ({ schedule }: Props) => {
   const dayOfWeek = useDate();
+  let weekDays = schedule;
+  weekDays.sort(function (a: any, b: any) {
+    return a.order - b.order;
+  });
+
+  console.log("hello", weekDays);
   return (
     <section
       id="schedule"
-      className=" bg-cover bg-center bg-[url(/schedule_green.jpg)]"
+      className=" bg-cover bg-center bg-[url(/schedule_green.jpg)] "
     >
       <div className="flex justify-center mt-2 py-[300px] backdrop-brightness-[0.75] ">
         {/* rectangle */}
@@ -36,8 +33,8 @@ const Schedule = ({ schedule }: Props) => {
               Pouring Times
             </h1>
             <ul className="grid grid-cols-1 gap-4 my-10">
-              {weekDays.map(({ _id, weekDay, status, hours }: any, _idx) => (
-                <li key={_idx} className="flex justify-between px-14 p-4">
+              {weekDays.map(({ _id, order, weekDay, status, hours }: any) => (
+                <li key={_id} className="flex justify-between px-14 p-4">
                   <h3
                     className={`text-md sm:text-2xl md:text-5xl font-regular text-cream ${
                       weekDay === dayOfWeek && "bg-sageGreen rounded-xl p-2"
@@ -45,7 +42,7 @@ const Schedule = ({ schedule }: Props) => {
                   >
                     {weekDay}
                   </h3>
-                  {status === "Closed" ? (
+                  {status === "CLOSED" ? (
                     <h3 className="text-md sm:text-2xl md:text-5xl font-regular text-cream">
                       {status}
                     </h3>

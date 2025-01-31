@@ -22,31 +22,31 @@ const Navbar = async () => {
           <div className="">
             <div className="flex gap-14">
               <Link
-                className="transition hover:border-b-2 hover:border-blushPeach hover:text-blushPeach duration-200"
+                className="transition hover:underline hover:text-blushPeach duration-200"
                 href="#scheduleTime"
               >
                 <span>Open Hours</span>
               </Link>
               <Link
-                className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach  duration-200"
+                className="transition border-white hover:underline hover:text-blushPeach  duration-200"
                 href="#menu"
               >
                 <span>Menu</span>
               </Link>
               <Link
-                className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
+                className="transition border-white hover:underline hover:text-blushPeach duration-200"
                 href="#order"
               >
                 <span>Order for Pickup</span>
               </Link>
               <Link
-                className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
+                className="transition border-white hover:underline hover:text-blushPeach duration-200"
                 href="#booking"
               >
                 <span>Book Our Cafe</span>
               </Link>
               <Link
-                className="transition hover:border-b-2 border-white hover:border-blushPeach hover:text-blushPeach duration-200"
+                className="transition border-white hover:underline hover:text-blushPeach duration-200"
                 href="#contact"
               >
                 <span>Contact Us</span>

@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { createAppointment } from "@/lib/actions";
 import emailjs from "@emailjs/browser";
+import DialogMsg from "../DialogMsg";
 
 const serviceId = "service_3ilgy07";
 const templateId = "template_119vv5f";
@@ -50,7 +51,6 @@ const Booking = ({ booking }: Props) => {
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
-
   const getDaysInMonth = (month: number, year: number) => {
     return new Date(year, month + 1, 0).getDate();
   };
@@ -93,20 +93,11 @@ const Booking = ({ booking }: Props) => {
     setPhone("");
     setTime("");
     setSelectedDate(selected);
-    toast({
-      title: "IMPORTANT NOTE",
-      description:
-        "Submitting a booking request does not guarantee a confirmed reservation. All bookings are subject to availability and approval by South Side Brews. Once your request is received, our team will review it and send you a confirmation text with payment details if your selected slot is available. Your booking is only finalized once payment is completed and you receive a confirmation from our management. Thank you for your understanding!",
-      variant: "destructive",
-      className: "text-red-900 font-bold bg-white",
-      duration: 20000,
-    });
     // console.log("Selected date:", selected.toDateString());
   };
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
-      emailjs.init(publicKey);
       const formValues = {
         month: months[selectedDate?.getMonth() ?? 0],
         day: selectedDate?.getDate() ?? 0,
@@ -118,6 +109,7 @@ const Booking = ({ booking }: Props) => {
       };
       console.log("Appointment Details:", formValues);
       await formSchema.parseAsync(formValues);
+
       const result = await createAppointment(
         prevState,
         formData,
@@ -136,8 +128,8 @@ const Booking = ({ booking }: Props) => {
         description,
         phone,
       };
-      emailjs
-        .send(serviceId, templateId, emailParams)
+      await emailjs
+        .send(serviceId, templateId, emailParams, publicKey)
         .then((response) => {
           console.log("Email sent.", response);
         })
@@ -150,10 +142,9 @@ const Booking = ({ booking }: Props) => {
           title: "Success",
           description:
             "Your booking has been created successfully. Someone will contact you soon.",
+          className: "bg-white",
         });
       }
-      // Handle successful form submission logic here
-      // alert("Appointment saved successfully!");
       setErrors({});
       setTitle("");
       setDescription("");
@@ -171,6 +162,7 @@ const Booking = ({ booking }: Props) => {
           title: "Error",
           description: "Please check your inputs and try again",
           variant: "destructive",
+          className: "bg-white",
         });
 
         // Reset form fields on error
@@ -187,6 +179,7 @@ const Booking = ({ booking }: Props) => {
         title: "Error",
         description: "An unexpected error has occurred",
         variant: "destructive",
+        className: "bg-white",
       });
 
       return {
@@ -213,9 +206,9 @@ const Booking = ({ booking }: Props) => {
         <p className="text-center text-cream opacity-75 mb-12">
           Plan ahead for a seamless cafe experience.
         </p>
-        <div className="flex justify-center w-[90%] max-w-6xl bg-sageGreen p-8 rounded-xl shadow-lg">
+        <div className="flex justify-center md:w-[90%] max-w-6xl bg-sageGreen md:p-8 rounded-xl shadow-lg">
           {/* Calendar Section */}
-          <div className="md:w-2/3 pr-4">
+          <div className="md:w-2/3 p-2 md:pr-4">
             {/* Month and Year Navigation */}
             <div className="flex items-center justify-between mb-6">
               <MdChevronLeft
@@ -239,20 +232,20 @@ const Booking = ({ booking }: Props) => {
             {/* Weekdays */}
             <div className="grid grid-cols-7 gap-2 text-center text-cream font-bold mb-4">
               {weekDays.map((day, idx) => (
-                <div key={idx} className="text-lg">
+                <div key={idx} className="text-md md:text-lg">
                   {day}
                 </div>
               ))}
             </div>
 
             {/* Days */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-2 ">
               {Array.from({ length: daysInMonth }, (_, idx) => idx + 1).map(
                 (day) =>
                   isTaken(day) ? (
                     <button
                       key={day}
-                      className={`p-4 rounded-lg ${
+                      className={`p-4 rounded-lg text-sm md:text-lg ${
                         selectedDate?.getDate() === day &&
                         selectedDate?.getMonth() === currentView.month &&
                         selectedDate?.getFullYear() === currentView.year
@@ -279,6 +272,8 @@ const Booking = ({ booking }: Props) => {
             </h3>
             {selectedDate ? (
               <>
+                {/* show important note */}
+                <DialogMsg />
                 <form action={formAction} className="booking-form">
                   <p className="mb-2">
                     <strong>Date:</strong> {selectedDate.toDateString()}
@@ -384,17 +379,6 @@ const Booking = ({ booking }: Props) => {
               <>
                 <p className="text-gray-500">
                   Please select a date to proceed.
-                </p>
-                <p className="text-red-500">
-                  <br></br>
-                  Booking Disclaimer: Submitting a booking request does not
-                  guarantee a confirmed reservation. All bookings are subject to
-                  availability and approval by South Side Brews. Once your
-                  request is received, our team will review it and send you a
-                  confirmation text with payment details if your selected slot
-                  is available. Your booking is only finalized once payment is
-                  completed and you receive a confirmation from our management.
-                  Thank you for your understanding!
                 </p>
               </>
             )}

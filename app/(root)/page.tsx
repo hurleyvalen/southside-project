@@ -15,6 +15,7 @@ export default async function Home() {
   const { data: booking } = await sanityFetch({ query: APPOINTMENTS_QUERY });
   const { data: schedule } = await sanityFetch({ query: SCHEDULE_QUERY });
   const { data: menu } = await sanityFetch({ query: MENU_QUERY });
+
   return (
     <>
       <Hero />

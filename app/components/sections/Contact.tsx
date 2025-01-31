@@ -17,6 +17,7 @@ const Contact = () => {
     name: "",
     email: "",
     message: "",
+    email_type: "Contact",
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -48,9 +49,10 @@ const Contact = () => {
       toast({
         title: "Success",
         description: "Your message has been sent successfully!",
+        className: "bg-white",
       });
 
-      setFormData({ name: "", email: "", message: "" }); // Reset form
+      setFormData({ name: "", email: "", message: "", email_type: "Contact" }); // Reset form
       setSubmitted(true);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -66,6 +68,7 @@ const Contact = () => {
           title: "Validation Error",
           description: "Please check your inputs and try again.",
           variant: "destructive",
+          className: "bg-white",
         });
 
         return;
@@ -75,6 +78,7 @@ const Contact = () => {
         title: "Error",
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
+        className: "bg-white",
       });
     }
   };
