@@ -23,6 +23,7 @@ export const formSchema = z.object({
 });
 
 export const contactFormSchema = z.object({
+  email_type: z.string(),
   name: z
     .string()
     .regex(/^[a-zA-Z\s'-]+$/, { message: "Name contains invalid characters." }) // Allows letters, spaces, apostrophes, and hyphens

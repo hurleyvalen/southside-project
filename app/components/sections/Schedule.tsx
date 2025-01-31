@@ -12,7 +12,6 @@ const Schedule = ({ schedule }: Props) => {
     return a.order - b.order;
   });
 
-  console.log("hello", weekDays);
   return (
     <section
       id="schedule"
