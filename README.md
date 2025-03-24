@@ -1,6 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
+<!--  ## Getting Started
 
 First, run the development server:
 
@@ -37,7 +35,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 /// save ////
 
-<!-- <div className="flex items-center">
+<div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left">
                   <MenuButton className="inline-flex w-full px-3 py-2 text-sm font-semibold text-black text-base">
                     {session?.user.name}
